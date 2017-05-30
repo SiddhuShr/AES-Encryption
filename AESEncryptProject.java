@@ -9,8 +9,7 @@ package Projects;
  *
  * @author C-Dhant
  */
-import java.io.*;
-import java.security.*;
+
 import java.util.*;
 
 import javax.crypto.Cipher;
@@ -56,7 +55,7 @@ public class AESEncryptProject implements ActionListener{
     public static void main(String[] args) {
         new AESEncryptProject();
     }
-	public static void setKey(String myKey) 
+	public static void setKey(String myKey) //creating the secret key
 	{
 		
 			key = myKey.getBytes();
@@ -64,14 +63,14 @@ public class AESEncryptProject implements ActionListener{
 			secretKey = new SecretKeySpec(key, "AES");
 	}
 
-	public static String encrypt(String strToEncrypt, String secret) 
+	public static String encrypt(String strToEncrypt, String secret) //encryption method
 	{
 		try 
 		{
 			setKey(secret);
 			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-			return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes()));
+			cipher.init(Cipher.ENCRYPT_MODE, secretKey);//initate encryption mode
+			return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes()));//base64.getencoder encodes using the Basic type base64 encoding scheme
 		} 
 		catch (Exception e) 
 		{
@@ -80,7 +79,21 @@ public class AESEncryptProject implements ActionListener{
 		return null;
 	}
 
-	
+	/*public static String decrypt(String strToDecrypt, String secret) 
+	{
+		try 
+		{
+			setKey(secret);
+			Cipher cipher = Cipher.getInstance("AES");
+			cipher.init(Cipher.DECRYPT_MODE, secretKey);
+			return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Error while decrypting: " + e.toString());
+		}
+		return null;
+	}*/
         
      public void actionPerformed(ActionEvent e)
      {
@@ -93,5 +106,24 @@ public class AESEncryptProject implements ActionListener{
          }
          
      }
-
+/*public static void main(String[] args) 
+{
+     System.out.println("Enter the secret key");
+     Scanner s = new Scanner(System.in);
+     String secretKey = s.next();
+     
+     
+     Scanner sr = new Scanner(System.in);
+     System.out.println("Enter the message");
+     String originalString =sr.nextLine();
+             
+     
+    String encryptedString = AESEncryptProject.encrypt(originalString, secretKey) ;
+    String decryptedString = AESEncryptProject.decrypt(encryptedString, secretKey) ;
+    //AESDecryptProject obj = new AESDecryptProject(encryptedString,secretKey);
+     
+    System.out.println(originalString);
+    System.out.println(encryptedString);
+    System.out.println(decryptedString);
+}*/
 }

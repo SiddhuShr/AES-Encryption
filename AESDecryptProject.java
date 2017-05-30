@@ -18,7 +18,7 @@ import java.awt.event.*;
  * @author C-Dhant
  */
 public class AESDecryptProject implements ActionListener {
-    private static SecretKeySpec secretKey;
+    private static SecretKeySpec secretKey;//construct a SecretKey from a byte array
 	private static byte[] key;
         JFrame f1;
         JLabel l1,l2,l3;
@@ -53,7 +53,7 @@ public class AESDecryptProject implements ActionListener {
     public static void main(String[] args) {
         new AESDecryptProject();
     }
-    public static void setKey(String myKey) 
+    public static void setKey(String myKey) //creating a secret key
 	{
 		
 			key = myKey.getBytes();
@@ -66,9 +66,9 @@ public class AESDecryptProject implements ActionListener {
 		try 
 		{
 			setKey(secret);
-			Cipher cipher = Cipher.getInstance("AES");
-			cipher.init(Cipher.DECRYPT_MODE, secretKey);
-			return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+			Cipher cipher = Cipher.getInstance("AES");//chiper object creation and getInstance creates the cipher object and aes is transformation
+			cipher.init(Cipher.DECRYPT_MODE, secretKey);// initialize cipher to decryption mode
+			return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));//base64.getdecoder decodes using the Basic type base64 encoding scheme
 		} 
 		catch (Exception e) 
 		{

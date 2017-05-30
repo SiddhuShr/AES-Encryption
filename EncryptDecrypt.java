@@ -55,7 +55,7 @@ public class EncryptDecrypt {
             
         }
        });
-       
+         //f1.setVisible(false);
     }
     
     public static void main(String[] args) {
